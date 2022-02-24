@@ -10,8 +10,9 @@
 
 # Fill out the following values
 # The path of your repo on github. Don't put the whole URL, just the part after github.com/
-export UNIT_TWO_REPO_NAME=ata-unit-two-project-yourusernamehere
 
+export UNIT_TWO_REPO_NAME=KenzieAcademy-SoftwareEngineering/ata-unit-two-project-bmamadiev
+export GITHUB_USERNAME=bmamadiev
 # Do not modify the rest of these unless you have been instructed to do so.
 export UNIT_TWO_PROJECT_NAME=unitproject2
 export UNIT_TWO_PIPELINE_STACK=$UNIT_TWO_PROJECT_NAME-$GITHUB_USERNAME
