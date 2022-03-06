@@ -2,6 +2,7 @@ package com.kenzie.unit.two.employee.lambda;
 
 import com.kenzie.unit.two.App;
 import com.kenzie.unit.two.employee.lambda.models.ViewEmployeePayCheckRequest;
+import com.kenzie.unit.two.employee.service.UserOrRoleNotFoundException;
 import com.kenzie.unit.two.employee.service.models.Employee;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -25,7 +26,12 @@ public class ViewEmployeePayCheck implements RequestHandler<ViewEmployeePayCheck
         logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
         logger.log("EVENT: " + gson.toJson(event));
 
-        Employee employee = App.employeeService().getEmployeePayCheck(event);
+        Employee employee = null;
+        try {
+            employee = App.employeeService().getEmployeePayCheck(event);
+        } catch (UserOrRoleNotFoundException e) {
+            e.printStackTrace();
+        }
         return employee;
     }
 }

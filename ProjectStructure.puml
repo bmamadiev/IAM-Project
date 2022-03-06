@@ -1,0 +1,185 @@
+@startuml
+class com.kenzie.unit.two.employee.service.models.Employee{
+- java.lang.String id
+- java.lang.String userName
+- java.lang.String payCheck
+- java.lang.String department
++ void Employee (String id, String userName, String department, String )
++ java.lang.String getId ()
++ java.lang.String getUserName ()
++ java.lang.String getPayCheck ()
++ java.lang.String getDepartment ()
++ boolean equals (Object )
++ int hashCode ()
++ java.lang.String toString ()
+}
+class com.kenzie.unit.two.employee.service.EmployeeService{
+- com.kenzie.unit.two.iam.service.UserRoleService userRoleService
+- com.kenzie.unit.two.iam.service.UserService userService
+- com.kenzie.unit.two.iam.service.RoleService roleService
+- org.apache.logging.log4j.Logger log
+- java.lang.ClassLoader loader
++ void EmployeeService (UserRoleService userRoleService, UserService userService, RoleService )
++ com.kenzie.unit.two.employee.service.models.Employee getEmployeePayCheck (ViewEmployeePayCheckRequest )
++ boolean theCorrectUser (String requestingUsername, String )
++ boolean inTheSameDepartment (String requestingDepartment, String )
+}
+
+class com.kenzie.unit.two.iam.models.Role{
+- java.util.UUID id
+- java.lang.String roleName
++ void Role (UUID id, String )
++ java.util.UUID getId ()
++ java.lang.String getRoleName ()
++ boolean equals (Object )
++ int hashCode ()
++ java.lang.String toString ()
+}
+class com.kenzie.unit.two.iam.models.User{
+- java.util.UUID id
+- java.lang.String userName
+- com.kenzie.unit.two.iam.models.Department department
++ void User (UUID id, String userName, Department )
++ java.util.UUID getId ()
++ java.lang.String getUserName ()
++ com.kenzie.unit.two.iam.models.Department getDepartment ()
++ boolean equals (Object )
++ int hashCode ()
++ java.lang.String toString ()
+}
+class com.kenzie.unit.two.iam.models.UserRoles{
+- com.kenzie.unit.two.iam.models.User user
+- java.util.List<com.kenzie.unit.two.iam.models.Role> roles
++ void UserRoles (User user, List<Role> )
++ com.kenzie.unit.two.iam.models.User getUser ()
++ java.util.List<com.kenzie.unit.two.iam.models.Role> getRoles ()
+}
+class com.kenzie.unit.two.iam.models.Department{
+- java.util.UUID id
+- java.lang.String name
++ void Department (UUID id, String )
++ java.util.UUID getId ()
++ java.lang.String getName ()
++ boolean equals (Object )
++ int hashCode ()
++ java.lang.String toString ()
+}
+class com.kenzie.unit.two.iam.models.FunctionalRole{
+- java.util.List<com.kenzie.unit.two.iam.entities.Roles> roles
++ void FunctionalRole (List<Roles> )
++ java.lang.Boolean matches (List<Role> )
+}
+class com.kenzie.unit.two.iam.service.RoleService{
+- com.kenzie.unit.two.iam.storage.Storage storage
++ void RoleService (Storage )
++ com.kenzie.unit.two.iam.models.Role createRole (CreateRoleRequest )
++ com.kenzie.unit.two.iam.models.Role getRoleByRoleName (String )
++ com.kenzie.unit.two.iam.models.Role getRoleByRoleId (String )
++ java.util.List<com.kenzie.unit.two.iam.models.Role> getRoles ()
+}
+class com.kenzie.unit.two.iam.service.UserService{
+- com.kenzie.unit.two.iam.storage.Storage storage
++ void UserService (Storage )
++ com.kenzie.unit.two.iam.models.User createUser (CreateUserRequest )
++ com.kenzie.unit.two.iam.models.User getUserByUserName (String )
++ com.kenzie.unit.two.iam.models.User getUserByUserId (String )
++ java.util.List<com.kenzie.unit.two.iam.models.User> getUsers ()
+}
+class com.kenzie.unit.two.iam.service.UserRoleService{
+- com.kenzie.unit.two.iam.storage.Storage storage
++ void UserRoleService (Storage )
++ com.kenzie.unit.two.iam.models.UserRoles createUserRole (AssignUserToRoleRequest )
++ com.kenzie.unit.two.iam.models.UserRoles getUserRoles (GetUserRolesRequest )
++ com.kenzie.unit.two.iam.models.UserRoles getUserRoles (String )
++ boolean doesUserHaveRole (User user, Role )
+}
+class com.kenzie.unit.two.iam.service.DepartmentService{
+- com.kenzie.unit.two.iam.storage.Storage storage
++ void DepartmentService (Storage )
++ com.kenzie.unit.two.iam.models.Department createDepartment (CreateDepartmentRequest )
++ java.util.List<com.kenzie.unit.two.iam.models.Department> getDepartments ()
++ com.kenzie.unit.two.iam.models.Department getDepartmentByName (String )
++ com.kenzie.unit.two.iam.models.Department getDepartmentById (String )
+}
+class com.kenzie.unit.two.iam.storage.Storage{
++ java.lang.String DEPARTMENTS_DATA_STORE
++ java.lang.String USERS_DATA_STORE
++ java.lang.String ROLES_DATA_STORE
++ java.lang.String USER_ROLES_DATA_STORE
+ int DEFAULT_BUFFER_SIZE
+- com.amazonaws.services.s3.AmazonS3 s3client
+- com.google.gson.Gson gson
+- java.lang.String bucketName
++ void Storage ()
+- void createBucket ()
++ java.util.List<com.kenzie.unit.two.iam.models.Department> getDepartments ()
++ void storeDepartment (Department )
++ com.kenzie.unit.two.iam.models.Department getDepartment (String )
++ com.kenzie.unit.two.iam.models.Department getDepartmentByName (String )
++ java.util.List<com.kenzie.unit.two.iam.models.User> getUsers ()
++ void storeUser (User )
++ com.kenzie.unit.two.iam.models.User getUser (String )
++ com.kenzie.unit.two.iam.models.User getUserByUsername (String )
++ java.util.List<com.kenzie.unit.two.iam.models.Role> getRoles ()
++ void storeRole (Role )
++ com.kenzie.unit.two.iam.models.Role getRole (String )
++ com.kenzie.unit.two.iam.models.Role getRoleByRoleName (String )
++ com.kenzie.unit.two.iam.models.UserRoles storeUserRole (User user, Role )
++ com.kenzie.unit.two.iam.models.UserRoles getUserRoles (User )
+- java.util.Map<java.lang.String,java.util.List<com.kenzie.unit.two.iam.models.Role>> getUserRolesMap ()
++ boolean doesUserHaveRole (User user, Role )
+- java.lang.String getContentFromS3Bucket (String )
+- java.lang.String convertInputStreamToString (InputStream )
+}
+class com.kenzie.unit.two.iam.entities.Roles{
++ com.kenzie.unit.two.iam.entities.Roles PACK_ITEMS
++ com.kenzie.unit.two.iam.entities.Roles VIEW_PAYCHECK
++ com.kenzie.unit.two.iam.entities.Roles CREATE_INVOICE
++ com.kenzie.unit.two.iam.entities.Roles VIEW_CLIENT
+- java.lang.String roleName
+- java.lang.String name
+- int ordinal
+- void Roles (String )
++ java.lang.String getRoleName ()
++ com.kenzie.unit.two.iam.entities.Roles[] values ()
++ com.kenzie.unit.two.iam.entities.Roles valueOf (String )
+}
+class java.lang.Enum{
+- java.lang.String name
+- int ordinal
++ java.lang.String name ()
++ int ordinal ()
+# void Enum (String name, int )
++ java.lang.String toString ()
++ boolean equals (Object )
++ int hashCode ()
+# java.lang.Object clone ()
++ int compareTo (E )
++ java.lang.Class<E> getDeclaringClass ()
++ java.util.Optional<java.lang.Enum.EnumDesc<E>> describeConstable ()
++ T valueOf (Class<T> enumClass, String )
+# void finalize ()
+- void readObject (ObjectInputStream )
+- void readObjectNoData ()
+}
+
+class com.kenzie.unit.two.iam.entities.Departments{
++ com.kenzie.unit.two.iam.entities.Departments WAREHOUSE
++ com.kenzie.unit.two.iam.entities.Departments HUMAN_RESOURCES
++ com.kenzie.unit.two.iam.entities.Departments LOGISTICS
+- java.lang.String name
+- int ordinal
++ com.kenzie.unit.two.iam.entities.Departments[] values ()
++ com.kenzie.unit.two.iam.entities.Departments valueOf (String )
+}
+
+class com.kenzie.unit.two.warehouse.service.WareHouseService{
+- com.kenzie.unit.two.iam.service.UserRoleService userRoleService
+- com.kenzie.unit.two.iam.service.UserService userService
+- com.kenzie.unit.two.iam.service.RoleService roleService
+- com.kenzie.unit.two.iam.models.FunctionalRole invoicingClientRole
++ void WareHouseService (UserRoleService userRoleService, UserService userService, RoleService )
++ boolean canWarehouseUserPackItem (CanUserPackItemRequest )
++ boolean canInvoiceClient (CanInvoiceClientRequest )
+}
+@enduml

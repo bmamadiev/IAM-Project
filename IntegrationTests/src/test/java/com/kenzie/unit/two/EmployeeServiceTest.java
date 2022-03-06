@@ -68,7 +68,7 @@ public class EmployeeServiceTest {
 
 
     @Test
-    void employeePaycheckLogsInfo_TASK_2() {
+    void employeePaycheckLogsInfo_TASK_2() throws UserOrRoleNotFoundException {
 
         User validUser = new User(UUID.randomUUID(), "margaret", new Department(UUID.randomUUID(), "marketing"));
         Role validRole = new Role(UUID.randomUUID(), "view-paycheck");
@@ -91,7 +91,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void getEmployeePaycheckTest_TASK_2() {
+    void getEmployeePaycheckTest_TASK_2() throws UserOrRoleNotFoundException {
         Department department = new Department(UUID.randomUUID(), "Marketing");
         User validUser = new User(UUID.randomUUID(), "margaretparis", department);
         Role validRole = new Role(UUID.randomUUID(), "view-paycheck");

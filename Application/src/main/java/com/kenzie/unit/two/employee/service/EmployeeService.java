@@ -33,14 +33,14 @@ public class EmployeeService {
         this.roleService = roleService;
     }
 
-    public Employee getEmployeePayCheck(ViewEmployeePayCheckRequest request) {
+    public Employee getEmployeePayCheck(ViewEmployeePayCheckRequest request) throws UserOrRoleNotFoundException {
         Employee employee = null;
 
         Role viewPayCheck = roleService.getRoleByRoleName(Roles.VIEW_PAYCHECK.getRoleName());
         User user = userService.getUserByUserName(request.getRequesterUserName());
 
         if (!userRoleService.doesUserHaveRole(user, viewPayCheck)) {
-            throw new UnauthorizedException("Employee does not have the required role");
+            throw new UserOrRoleNotFoundException("Employee does not have the required role");
         } else {
             try {
                 File file = new File(loader.getResource("employee.csv").getPath());

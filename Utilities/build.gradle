@@ -6,3 +6,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
+
+dependencies {
+    implementation 'org.realityforge.javax.annotation:javax.annotation:1.0.1'
+}
