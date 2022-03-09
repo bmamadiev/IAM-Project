@@ -1,6 +1,7 @@
 package com.kenzie.unit.two.warehouse.lambda;
 
 import com.kenzie.unit.two.App;
+import com.kenzie.unit.two.employee.service.UserOrRoleNotFoundException;
 import com.kenzie.unit.two.warehouse.lambda.models.CanUserPackItemRequest;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -24,7 +25,12 @@ public class CanUserPackItem implements RequestHandler<CanUserPackItemRequest, B
         logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
         logger.log("EVENT: " + gson.toJson(event));
 
-        Boolean doesUserHaveRole = App.warehouseService().canWarehouseUserPackItem(event);
+        Boolean doesUserHaveRole = null;
+        try {
+            doesUserHaveRole = App.warehouseService().canWarehouseUserPackItem(event);
+        } catch (UserOrRoleNotFoundException e) {
+            e.printStackTrace();
+        }
         return doesUserHaveRole;
     }
 }
