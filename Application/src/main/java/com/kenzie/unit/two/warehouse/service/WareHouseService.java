@@ -42,7 +42,6 @@ public class WareHouseService {
         if (user == null) {
             throw new UserOrRoleNotFoundException("User not found");
         }
-
         return userRoleService.doesUserHaveRole(user, packItem);
     }
 

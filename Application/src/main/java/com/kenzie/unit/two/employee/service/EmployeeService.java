@@ -55,6 +55,7 @@ public class EmployeeService {
                     if (theCorrectUser(request.getEmployeeUserName(), userName)) {
                         if (inTheSameDepartment(user.getDepartment().getName(), department)) {
                             employee = new Employee(id, userName, department, payCheck);
+                            log.info("Audit: User " + user + " viewed employee " + userName + " paycheck information");
                         } else {
                             throw new UnauthorizedException("User does not belong to employee's department");
                         }

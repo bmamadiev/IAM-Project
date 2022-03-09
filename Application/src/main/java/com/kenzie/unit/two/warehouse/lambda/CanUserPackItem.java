@@ -26,11 +26,9 @@ public class CanUserPackItem implements RequestHandler<CanUserPackItemRequest, B
         logger.log("EVENT: " + gson.toJson(event));
 
         Boolean doesUserHaveRole = null;
-        try {
-            doesUserHaveRole = App.warehouseService().canWarehouseUserPackItem(event);
-        } catch (UserOrRoleNotFoundException e) {
-            e.printStackTrace();
-        }
+
+        doesUserHaveRole = App.warehouseService().canWarehouseUserPackItem(event);
+
         return doesUserHaveRole;
     }
 }
