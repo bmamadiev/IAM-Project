@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 
 public class EmployeeService {
@@ -33,11 +34,18 @@ public class EmployeeService {
         this.roleService = roleService;
     }
 
-    public Employee getEmployeePayCheck(ViewEmployeePayCheckRequest request) throws UserOrRoleNotFoundException {
+    public Employee getEmployeePayCheck(ViewEmployeePayCheckRequest request) {
         Employee employee = null;
 
         Role viewPayCheck = roleService.getRoleByRoleName(Roles.VIEW_PAYCHECK.getRoleName());
+            if (viewPayCheck == null) {
+            throw new UserOrRoleNotFoundException("User Role not Found");
+            }
+
         User user = userService.getUserByUserName(request.getRequesterUserName());
+            if (user == null) {
+            throw new UserOrRoleNotFoundException("User not Found");
+            }
 
         if (!userRoleService.doesUserHaveRole(user, viewPayCheck)) {
             throw new UserOrRoleNotFoundException("Employee does not have the required role");
@@ -54,7 +62,7 @@ public class EmployeeService {
 
                     if (theCorrectUser(request.getEmployeeUserName(), userName)) {
                         if (inTheSameDepartment(user.getDepartment().getName(), department)) {
-                            employee = new Employee(id, userName, department, payCheck);
+                            employee = new Employee(UUID.fromString(id), userName, userService.getUserByUserId(id).getDepartment(), payCheck);
                         } else {
                             throw new UnauthorizedException("User does not belong to employee's department");
                         }
