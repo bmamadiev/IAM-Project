@@ -62,7 +62,7 @@ public class EmployeeService {
 
                     if (theCorrectUser(request.getEmployeeUserName(), userName)) {
                         if (inTheSameDepartment(user.getDepartment().getName(), department)) {
-                            employee = new Employee(UUID.fromString(id), userName, userService.getUserByUserId(id).getDepartment(), payCheck);
+                            employee = new Employee(UUID.fromString(id), userName, user.getDepartment(), payCheck);
                         } else {
                             throw new UnauthorizedException("User does not belong to employee's department");
                         }
