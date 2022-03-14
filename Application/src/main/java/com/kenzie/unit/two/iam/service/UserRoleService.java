@@ -9,6 +9,8 @@ import com.kenzie.unit.two.iam.storage.Storage;
 
 import com.kenzie.ata.ExcludeFromJacocoGeneratedReport;
 
+import java.util.List;
+
 @ExcludeFromJacocoGeneratedReport
 public class UserRoleService {
     private final Storage storage;
@@ -35,12 +37,16 @@ public class UserRoleService {
 
     public boolean doesUserHaveRole(User user, Role role) {
         UserRoles userRoles = storage.getUserRoles(user);
-        if (userRoles != null && userRoles.getRoles() != null && role != null) {
-            for (Role userRole : userRoles.getRoles()) {
-                if (role.getRoleName().equalsIgnoreCase(userRole.getRoleName())) {
+        List<Role> roles = userRoles.getRoles();
+
+        // FEEDBACK - We call userRoles.getRoles() two times. Calling it once and saving the results could improve efficiency
+        if (userRoles != null && roles != null && role != null) {
+
+                // FEEDBACK - We don't need this loop here if we were to use the contains method
+                if (roles.contains(role)) {
                     return true;
                 }
-            }
+
         }
         return false;
     }
