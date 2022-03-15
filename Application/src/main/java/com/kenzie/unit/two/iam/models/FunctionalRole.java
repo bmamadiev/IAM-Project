@@ -19,16 +19,15 @@ public class FunctionalRole {
     // Compare incoming list to the ones required for this class.
     public Boolean matches(List<Role> roleList) {
         // TODO Task 5 - Write your code here ...
-        boolean matchCreateInvoiceRole = false;
-        boolean matchViewClientRole = false;
+
         if (roleList != null) {
                 if (roleList.contains(Roles.CREATE_INVOICE.getRoleName())) {
-                    matchCreateInvoiceRole = true;
+                    return true;
                 }
                 if (roleList.contains(Roles.VIEW_CLIENT.getRoleName())) {
-                    matchViewClientRole = true;
+                    return true;
                 }
         }
-        return matchCreateInvoiceRole && matchViewClientRole;
+        return false;
     }
 }
