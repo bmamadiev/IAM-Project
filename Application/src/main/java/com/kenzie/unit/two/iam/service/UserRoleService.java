@@ -1,5 +1,6 @@
 package com.kenzie.unit.two.iam.service;
 
+import com.kenzie.unit.two.employee.service.UserOrRoleNotFoundException;
 import com.kenzie.unit.two.iam.lambda.models.AssignUserToRoleRequest;
 import com.kenzie.unit.two.iam.lambda.models.GetUserRolesRequest;
 import com.kenzie.unit.two.iam.models.Role;
@@ -39,6 +40,14 @@ public class UserRoleService {
         UserRoles userRoles = storage.getUserRoles(user);
         List<Role> roles = userRoles.getRoles();
 
+        if (user == null) {
+            throw new UserOrRoleNotFoundException("User not found");
+        }
+
+        if (role == null) {
+            throw new UserOrRoleNotFoundException("Role not found");
+        }
+
         // FEEDBACK - We call userRoles.getRoles() two times. Calling it once and saving the results could improve efficiency
         if (userRoles != null && roles != null && role != null) {
 
@@ -46,7 +55,6 @@ public class UserRoleService {
                 if (roles.contains(role)) {
                     return true;
                 }
-
         }
         return false;
     }
