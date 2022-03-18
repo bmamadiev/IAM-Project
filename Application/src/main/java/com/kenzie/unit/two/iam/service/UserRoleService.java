@@ -49,13 +49,11 @@ public class UserRoleService {
         }
 
         // FEEDBACK - We call userRoles.getRoles() two times. Calling it once and saving the results could improve efficiency
-        if (userRoles != null && roles != null && role != null) {
+        if (roles != null) {
 
                 // FEEDBACK - We don't need this loop here if we were to use the contains method
-                if (roles.contains(role)) {
-                    return true;
-                }
+            return roles.contains(role);
         }
         return false;
-    }
+        }
 }

@@ -48,7 +48,7 @@ public class WareHouseService {
     public boolean canInvoiceClient(CanInvoiceClientRequest canInvoiceClientRequest) {
         User user = userService.getUserByUserName(canInvoiceClientRequest.getUserName());
         if (user == null) {
-            throw new UserOrRoleNotFoundException("User not found");
+            throw new IllegalArgumentException("User not found");
         }
         List<Role> roles = userRoleService.getUserRoles(user.getUserName()).getRoles();
 
