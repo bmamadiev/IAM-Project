@@ -4,6 +4,7 @@ import com.kenzie.unit.two.iam.entities.Roles;
 
 import com.kenzie.ata.ExcludeFromJacocoGeneratedReport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ExcludeFromJacocoGeneratedReport
@@ -33,13 +34,14 @@ public class FunctionalRole {
     }
 
 //        if (roleList != null) {
-//                if (roleList.contains(Roles.CREATE_INVOICE.getRoleName())) {
-//                    return true;
-//                }
-//                if (roleList.contains(Roles.VIEW_CLIENT.getRoleName())) {
-//                    return true;
-//                }
+//            return roleList.contains(Roles.CREATE_INVOICE.getRoleName()) || (roleList.contains(Roles.VIEW_CLIENT.getRoleName()));
 //        }
 //        return false;
 //    }
+//        List<String> roleListNames = new ArrayList();
+//        for (Role role : roleList) {
+//            roleListNames.add(role.getRoleName());
+//        }
+//        return roleListNames.containsAll(roles);
+
 }
