@@ -4,7 +4,6 @@ import com.kenzie.unit.two.iam.entities.Roles;
 
 import com.kenzie.ata.ExcludeFromJacocoGeneratedReport;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @ExcludeFromJacocoGeneratedReport
@@ -27,9 +26,4 @@ public class FunctionalRole {
         }
         return true;
     }
-//        List<String> roleListNames = new ArrayList();
-//        for (Role role : roleList) {
-//            roleListNames.add(role.getRoleName());
-//        }
-//        return roleListNames.containsAll(roles);
 }

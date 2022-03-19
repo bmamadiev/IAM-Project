@@ -1,7 +1,6 @@
 package com.kenzie.unit.two.warehouse.lambda;
 
 import com.kenzie.unit.two.App;
-import com.kenzie.unit.two.employee.service.UserOrRoleNotFoundException;
 import com.kenzie.unit.two.warehouse.lambda.models.CanUserPackItemRequest;
 
 import com.amazonaws.services.lambda.runtime.Context;

@@ -9,4 +9,5 @@ java {
 
 dependencies {
     implementation 'org.realityforge.javax.annotation:javax.annotation:1.0.1'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 }
