@@ -37,23 +37,21 @@ public class UserRoleService {
     }
 
     public boolean doesUserHaveRole(User user, Role role) {
-        UserRoles userRoles = storage.getUserRoles(user);
-        List<Role> roles = userRoles.getRoles();
 
-        if (user == null) {
+        if(!(storage.getUsers().contains(user))) {
             throw new UserOrRoleNotFoundException("User not found");
         }
 
-        if (role == null) {
+        if(!(storage.getRoles().contains(role))) {
             throw new UserOrRoleNotFoundException("Role not found");
         }
 
+        UserRoles userRoles = storage.getUserRoles(user);
+        List<Role> roles = userRoles.getRoles();
+
         // FEEDBACK - We call userRoles.getRoles() two times. Calling it once and saving the results could improve efficiency
         if (roles != null) {
-            if (!roles.contains(role) || !(userRoles.getUser().equals(user))) {
-                throw new UserOrRoleNotFoundException("User or role not found");
-            }
-                // FEEDBACK - We don't need this loop here if we were to use the contains method
+        // FEEDBACK - We don't need this loop here if we were to use the contains method
             return roles.contains(role);
         }
         return false;
