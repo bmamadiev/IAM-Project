@@ -20,34 +20,16 @@ public class FunctionalRole {
     // Compare incoming list to the ones required for this class.
     public Boolean matches(List<Role> roleList) {
         // TODO Task 5 - Write your code here ...
-        for (Role incomingRole : roleList) {
-            if(roles.contains(incomingRole)){
+        for (Role role : roleList) {
+            if (roles.contains(role)) {
                 return false;
             }
         }
         return true;
     }
-//            boolean matchCreateInvoiceRole = false;
-//            boolean matchViewClientRole = false;
-//            if (roleList != null) {
-//                if (roleList.contains(Roles.CREATE_INVOICE.getRoleName())) {
-//                    matchCreateInvoiceRole = true;
-//                }
-//                if (roleList.contains(Roles.VIEW_CLIENT.getRoleName())) {
-//                    matchViewClientRole = true;
-//                }
-//            }
-//            return matchCreateInvoiceRole && matchViewClientRole;
-//        }
-
-//        if (roleList != null) {
-//            return roleList.contains(Roles.CREATE_INVOICE.getRoleName()) || (roleList.contains(Roles.VIEW_CLIENT.getRoleName()));
-//        }
-//        return false;
-//    }
 //        List<String> roleListNames = new ArrayList();
 //        for (Role role : roleList) {
 //            roleListNames.add(role.getRoleName());
 //        }
 //        return roleListNames.containsAll(roles);
-    }
+}

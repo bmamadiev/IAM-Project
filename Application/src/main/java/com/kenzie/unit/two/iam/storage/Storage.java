@@ -144,6 +144,7 @@ public class Storage {
 
     public User getUserByUsername(String userName) {
         User user = null;
+
         List<User> users = getUsers();
         for (User listUser : users) {
             if (listUser.getUserName().equalsIgnoreCase(userName)) {

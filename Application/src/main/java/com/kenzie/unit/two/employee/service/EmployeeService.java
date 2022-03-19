@@ -38,14 +38,14 @@ public class EmployeeService {
         Employee employee = null;
 
         Role viewPayCheck = roleService.getRoleByRoleName(Roles.VIEW_PAYCHECK.getRoleName());
-            if (viewPayCheck == null) {
+        if (viewPayCheck == null) {
             throw new UserOrRoleNotFoundException("User Role not Found");
-            }
+        }
 
         User user = userService.getUserByUserName(request.getRequesterUserName());
-            if (user == null) {
+        if (user == null) {
             throw new UserOrRoleNotFoundException("User not Found");
-            }
+        }
 
         if (!userRoleService.doesUserHaveRole(user, viewPayCheck)) {
             throw new UserOrRoleNotFoundException("Employee does not have the required role");

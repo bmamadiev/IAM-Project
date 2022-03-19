@@ -50,10 +50,12 @@ public class UserRoleService {
 
         // FEEDBACK - We call userRoles.getRoles() two times. Calling it once and saving the results could improve efficiency
         if (roles != null) {
-
+            if (!roles.contains(role) || !(userRoles.getUser().equals(user))) {
+                throw new UserOrRoleNotFoundException("User or role not found");
+            }
                 // FEEDBACK - We don't need this loop here if we were to use the contains method
             return roles.contains(role);
         }
         return false;
-        }
+    }
 }

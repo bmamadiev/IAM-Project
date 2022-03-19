@@ -34,13 +34,10 @@ public class WareHouseService {
 
     public boolean canWarehouseUserPackItem(CanUserPackItemRequest request) {
         Role packItem = roleService.getRoleByRoleName(Roles.PACK_ITEMS.getRoleName());
-        if (packItem == null) {
-            throw new UserOrRoleNotFoundException("Role not found");
-        }
         User user = userService.getUserByUserName(request.getUserName());
 
-        if (user == null) {
-            throw new UserOrRoleNotFoundException("User not found");
+        if (packItem == null || user == null) {
+            throw new UserOrRoleNotFoundException("Role not found");
         }
         return userRoleService.doesUserHaveRole(user, packItem);
     }
@@ -51,6 +48,9 @@ public class WareHouseService {
             throw new IllegalArgumentException("User not found");
         }
         List<Role> roles = userRoleService.getUserRoles(user.getUserName()).getRoles();
+        if (roles == null) {
+            throw new IllegalArgumentException("Role not found");
+        }
 
         return invoicingClientRole.matches(roles);
     }
