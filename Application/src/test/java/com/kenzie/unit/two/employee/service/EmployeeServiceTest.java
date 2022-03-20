@@ -50,7 +50,7 @@ class EmployeeServiceTest {
     @Test
     void getEmployeePayCheck() {
         Department department = new Department(UUID.randomUUID(), "Marketing");
-        User user = new User(UUID.randomUUID(), "Behzod", department);
+        User user = new User(UUID.randomUUID(), "margaretparis", department);
         Role role = new Role(UUID.randomUUID(), "view-paycheck");
 
         when(this.userService.getUserByUserName(any())).thenReturn(user);
@@ -64,14 +64,24 @@ class EmployeeServiceTest {
         request.setRequesterUserName("margaretparis");
 
         Employee employee = spy.getEmployeePayCheck(request);
-
         Employee result = service.getEmployeePayCheck(request);
 
         assertEquals(employee.getUserName(), "margaretparis");
-        //assertEquals(service.getEmployeePayCheck(request), result);
         assertEquals(employee.getDepartment(), department);
         assertEquals(result.getUserName(), "margaretparis");
         assertEquals(result.getPayCheck(), "90000");
+    }
+    @Test
+    void getEmployeePayCheckThrowsException() {
+        Department department = new Department(UUID.randomUUID(), "Marketing");
+        User user = new User(UUID.randomUUID(), "margaretparis", department);
+
+        when(this.userService.getUserByUserName(any())).thenReturn(user);
+        when(this.roleService.getRoleByRoleName(any())).thenReturn(null);
+
+        ViewEmployeePayCheckRequest request = new ViewEmployeePayCheckRequest();
+
+        assertThrows(UserOrRoleNotFoundException.class, () -> service.getEmployeePayCheck(request));
     }
 
     @Test
