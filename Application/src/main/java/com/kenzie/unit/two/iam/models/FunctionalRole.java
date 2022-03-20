@@ -21,9 +21,9 @@ public class FunctionalRole {
         // TODO Task 5 - Write your code here ...
         for (Role role : roleList) {
             if (roles.contains(role)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
